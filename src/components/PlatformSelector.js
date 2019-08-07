@@ -1,21 +1,19 @@
-import React from 'react'
-
 let PlatformSelector = [
     {
         question: "what platform do you want to play on?",
         answers: [
             {
-                type:"Playstation",
+                type:"Platform",
                 content: "Playstation 4"
             },
 
             {
-                type:"Xbox",
+                type:"Platform",
                 content: "Xbox One"
             },
 
             {
-                type:"Nintendo",
+                type:"Platform",
                 content:"Nintendo Switch"
             }
         ]

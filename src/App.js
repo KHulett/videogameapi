@@ -1,79 +1,130 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import axios from "axios";
-import igdb from 'igdb-api-node';
-import PlatformSelector from './components/PlatformSelector';
+import igdb from "igdb-api-node";
+import apicalypse from "apicalypse";
+import PlatformSelector from "./components/PlatformSelector";
+import generalQuestions from "./components/generalques";
 
-// const client = igdb(process.env.REACT_APP_API_KEY)
+const client = process.env.REACT_APP_API_KEY;
+const requestOptions = {
+  queryMethod: 'body',
+  method: 'POST',
+  baseURL: 'https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/',
+  headers: {
+      'Accept': 'application/json',
+      "user-key": client,
+  },
+  responseType: 'json',
+  // timeout: 10000,
+}
+
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gameslist: null
-    }
+      playstation: null,
+      xbox: null,
+      nintendo: null,
+      data: []
+    };
   }
 
-// async componentDidMount(){
-//   axios({
-//     // url: "https://api-v3.igdb.com/games?limit=25",
-//     url: 'https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/platforms/?search=playstation&fields=id,name,generation',
-//     method: 'GET',
-//     headers: {
-//         'Accept': 'application/json',
-//         'user-key': client
-//     },
-//     data: "fields abbreviation,alternative_name,category,created_at,generation,name,platform_logo,product_family,slug,summary,updated_at,url,versions,websites;"
-//   })
-//   .then(response => this.setState({games: response}))
+  async componentDidMount() {
+    const response = await apicalypse(requestOptions)
+      .fields("name, platforms.name, genres.name, release_dates.category, age_ratings")
+      .limit(5)
+      // .search('mortal kombat')
+      .where('platforms = {48}' && 'genres = {14}')
+      .request('/games')
+      console.log(response.data)
+      this.setState({
+        data: response.data
+      })
+      
+      // .offset(10) // offset results by 10
 
-//     .then(response => console.log(response))
-//     .catch(err => {
-//         console.error(err);
-//     }) 
-//   }
+      // .sort("name") // default sort direction is 'asc' (ascending)
 
-async componentDidMount(){
-  const client = igdb(process.env.REACT_APP_API_KEY)
-const response = await client.games({
-  
-  filters: {
-      'release_dates.date-gt': '2010-12-31',
-      'release_dates.date-lt': '2012-01-01'
-  },
-  limit: 5,
-  offset: 0,
-  order: 'release_dates.date:desc',
-  search: 'zelda'
-}, [
-  'name',
-  'release_dates.date',
-  'rating',
-  'hypes',
-  'cover'
-])
-// .then(response => this.setState({gameslist: response}))
-// .then(response => console.log(response))
-    .catch(err => {
-        console.error(err);
-})
-}
+      // .search("mario") // search for a specific name (search implementations can vary)
 
-  render() { 
+      // .where(`first_release_date > ${new Date().getTime() / 1000}`) // filter the results
 
-    if(!this.state.games){
-      return <div>loading...</div>
-    } else {
-    return (
-      <div>
+      // .request("/games"); // execute the query and return a response object
 
-        <ul> 
-       {this.state.gameslist.data.map((names) => <li key={names.name}>{names.name}{names.release_date.date}</li>)}
-        </ul>
-      </div> 
     
-    )
+
+    //   url: 'https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com//release_dates/?fields=human,region,platform.name,game.name,game.cover.url&filter[game][eq]=38722&expand=platform,game',
+
+    //   method: 'POST',
+    //   headers: {
+    //       'Accept': 'application/json',
+    //       'user-key': client
+    //   },
+    //   // data: "fields *, *;",
+
+    // })
+    // console.log(playstation)
+    // this.setState({
+    //   playstation:playstation
+    // })
+
+    // const xboxone= await axios({
+    //     url: 'https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/platforms/?search=xbox one&fields=name,id,summary',
+
+    //   method: 'POST',
+    //   headers: {
+    //       'Accept': 'application/json',
+    //       'user-key': client
+    //   },
+    //   data: "fields *, *;",})
+
+    //   console.log(xboxone)
+    //   this.setState({
+    //     xboxone:xboxone
+    //   })
+
+    //   const nintendo= await axios({
+    //     url: 'https://cors-anywhere.herokuapp.com/https://api-v3.igdb.com/platforms/?search=nintendo switch&fields=name,id,summary',
+
+    //   method: 'POST',
+    //   headers: {
+    //       'Accept': 'application/json',
+    //       'user-key': client
+    //   },
+    //   data: "fields *, *;",})
+
+    //   console.log(nintendo)
+    //   this.setState({
+    //     nintendo:nintendo
+    //   })
+  }
+
+  render() {
+    if (!this.state.data) {
+      return <div>loading...</div>;
+    } else {
+      return (
+        <div>
+          <div>Which platform do you want to use?</div>
+          <div>
+            <ul>
+              {this.state.data.map(el => (
+                <li key={el.id}>
+                  {el.name}
+                  {/* {el.platforms.name} */}
+                  {/* {el.genres.name} */}
+                  {/* {el.release_dates.category} */}
+                  {/* {el.age_ratings.category.rating.name} */}
+                </li>
+              ))}
+              
+            </ul>
+          </div>
+        </div>
+      );
     }
   }
 }
- 
+
 export default App;
