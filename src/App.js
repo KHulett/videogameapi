@@ -28,12 +28,13 @@ class App extends Component {
     };
   }
 
-  async componentDidMount() {
+   queryFunction =async(event) => {
+    event.preventDefault()
     const response = await apicalypse(requestOptions)
       .fields("name, cover.url, platforms.name, genres.name, release_dates.y, age_ratings.rating")
       .limit(5)
       .search(this.state.query)
-      // .where('platforms = {130} & genres = {14}' )
+      .where('platforms = {130} & genres = {14}' )
       .request('/games')
       console.log(response.data)
       this.setState({
@@ -41,9 +42,9 @@ class App extends Component {
       })
     }
 
-    handleChange = () => {
+    handleChange = (event) => {
       this.setState({
-        query: this.search.value
+        query: event.target.value
      
       })
     }
@@ -73,13 +74,13 @@ class App extends Component {
             </ul>
           </div>
           <div>
-              <form>
+              <form onSubmit={(event)=>this.queryFunction(event)}>
                 <input
                   placeholder="Search for..."
                   ref={input => this.search = input}
-                  // onChange={this.handleInputChange}
+                  onChange={this.handleChange}
                 />
-                <button onClick = {this.handleChange}>submit</button>
+                <button type ="submit">submit</button>
                   <p>{this.state.query}</p>
               </form>
           </div>
