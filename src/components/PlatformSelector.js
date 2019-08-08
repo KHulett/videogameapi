@@ -3,17 +3,17 @@ let PlatformSelector = [
         question: "what platform do you want to play on?",
         answers: [
             {
-                type:"Platform",
+                type:"48",
                 content: "Playstation 4"
             },
 
             {
-                type:"Platform",
+                type:"49",
                 content: "Xbox One"
             },
 
             {
-                type:"Platform",
+                type:"130",
                 content:"Nintendo Switch"
             }
         ]

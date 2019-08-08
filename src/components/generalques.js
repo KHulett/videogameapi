@@ -3,29 +3,39 @@ let generalQuestions = [
         question: "What genre of games to you like to play?",
         answers: [
             {
-                type:"genre",
-                content: "Action"
+                type:"5",
+                content: "Shooter"
 
             },
 
             {
-                type:"genre",
+                type:"31",
                 content: "Adventure"
             },
 
             {
-                type:"genre",
+                type:"12",
                 content:"Role-playing"
             },
 
             {
-                type:"genre",
+                type:"15",
                 content:"Strategy"
             },
 
             {
-                type:"genre",
+                type:"14",
                 content:"Sports"
+            },
+
+            {
+                type:"8",
+                content:"Platform"
+            },
+
+            {
+                type:"13",
+                content:"Simulator"
             }
         ]
     },
@@ -35,27 +45,27 @@ let generalQuestions = [
         answers: [
 
             {
-                type:'esrb rating',
+                type:'8',
                 content: "Everyone"
             },
 
             {
-                type: "esrb rating",
+                type: "9",
                 content: "Everyone 10+"
             },
 
             {
-                type: "esrb rating",
+                type: "10",
                 content: "Teen"
             },
 
             {
-                type: "esrb rating",
+                type: "11",
                 content: "Mature"
             },
 
             {
-                type: "esrb rating",
+                type: "12",
                 content: "Adults Only"
             }
         ]
