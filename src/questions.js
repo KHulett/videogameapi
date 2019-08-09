@@ -76,27 +76,27 @@ let generalQuestions = {
       answers: [
 
           {
-              type: "release date",
+              type: "29598",
               content: "2013"
           },
 
           {
-              type: "release date",
+              type: "61379",
               content: "2014"
           },
 
           {
-              type: "release date",
+              type: "44191",
               content: "2015"
           },
 
           {
-              type: "release date",
+              type: "44188",
               content: "2016"
           },
 
           {
-              type: "release date",
+              type: "113146",
               content: "2017"
           },
 
@@ -106,7 +106,7 @@ let generalQuestions = {
           },
 
           {
-              type: "release date",
+              type: "165061",
               content: "2019"
           },
       ]
