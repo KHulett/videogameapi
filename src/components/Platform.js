@@ -13,7 +13,7 @@ class Platform extends Component {
             <div>
             <ul>
             {platformSelector.answers.map(question=>
-            <button key = {question.content}><Link to ={`/quiz/${question.content}`} >{question.content} </Link>  </button>
+            <button key = {question.content}><Link to ={`/quiz/${question.type}`} >{question.content} </Link>  </button>
             )}    
             </ul>        
             </div>    

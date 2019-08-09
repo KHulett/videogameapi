@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter} from 'react-router-dom'
-import Routes from './Routes'
+import {BrowserRouter} from 'react-router-dom';
+import Routes from './Routes';
+import Platform from './components/Platform';
+import Quiz from './components/Quiz';
 
 ReactDOM.render(<BrowserRouter><Routes /></BrowserRouter>, document.getElementById('root'));
 

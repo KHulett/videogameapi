@@ -101,7 +101,7 @@ let generalQuestions = {
           },
 
           {
-              type: "release date",
+              type: "1538129354",
               content: "2018"
           },
 
