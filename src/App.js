@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import axios from "axios";
 import igdb from "igdb-api-node";
 import apicalypse from "apicalypse";
-import PlatformSelector from "./components/PlatformSelector";
-import generalQuestions from "./components/generalques";
+import {Platform} from "./components";
 
 const client = process.env.REACT_APP_API_KEY;
+
 const requestOptions = {
   queryMethod: 'body',
   method: 'POST',
@@ -53,6 +53,7 @@ class App extends Component {
     
 
   render() {
+    console.log('hello this is the App component')
     if (!this.state.data) {
       return <div>loading...</div>;
     } else {
