@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import axios from "axios";
 import igdb from "igdb-api-node";
 import apicalypse from "apicalypse";
-import PlatformSelector from "./components/PlatformSelector";
-import generalQuestions from "./components/generalques";
+import {Platform} from "./components";
+import Routes from "./Routes"
 
 const client = process.env.REACT_APP_API_KEY;
+
 const requestOptions = {
   queryMethod: 'body',
   method: 'POST',
@@ -53,6 +54,7 @@ class App extends Component {
     
 
   render() {
+    console.log('hello this is the App component')
     if (!this.state.data) {
       return <div>loading...</div>;
     } else {
@@ -64,11 +66,11 @@ class App extends Component {
               {this.state.data.map(el => (
                 <li key={el.id}>
                   <div><h1>{el.name}</h1></div>
-                  {/* <div><img src="//images.igdb.com/igdb/image/upload/t_cover_big/skv3lqtyi00jpuxqx7ca.jpg" alt="cover"/></div>
-                  <div>{el.platforms[0].name}</div>
-                  <div>{el.genres[0].name}</div>
-                  <div>{el.release_dates[0].y}</div>
-                  <div>{el.age_ratings && el.age_ratings[0].rating}</div> */}
+                  {/* <div><img src="//images.igdb.com/igdb/image/upload/t_cover_big/skv3lqtyi00jpuxqx7ca.jpg" alt="cover"/></div> */}
+                  <div>{el.platforms && el.platforms[0].name}</div>
+                  <div>{el.genres && el.genres[0].name}</div>
+                  <div>{el.release_dates && el.release_dates[0].y}</div>
+                  <div>{el.age_ratings && el.age_ratings[0].rating}</div>
                 </li>
               ))}
             </ul>
@@ -84,6 +86,8 @@ class App extends Component {
                   <p>{this.state.query}</p>
               </form>
           </div>
+
+          <Routes/>
         </div>
       );
     }
